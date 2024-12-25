@@ -1,0 +1,220 @@
+/* Style général de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a2e;
+    color: #eaeaea;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Titre principal */
+h1 {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    margin: 0;
+    font-size: 32px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section du statut du jeu */
+#gameStatus {
+    font-size: 18px;
+    margin: 20px 0;
+    font-weight: bold;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 2px solid #4caf50;
+}
+
+/* Messages du jeu */
+#message {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #f2f2f2;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* Style de la carte et des éléments */
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(5, 60px); /* 5 colonnes pour une carte */
+    grid-template-rows: repeat(5, 60px);    /* 5 lignes pour une carte */
+    gap: 5px;
+    margin: 20px auto;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style des cases */
+.tile {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pour l'effet au survol */
+.tile:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Styles spécifiques pour le joueur, les monstres et les objets */
+.player {
+    background: linear-gradient(to bottom, #00c6ff, #0072ff);
+    color: white;
+    border: 2px solid white;
+}
+
+.monster {
+    background: linear-gradient(to bottom, #ff512f, #dd2476);
+    color: white;
+    border: 2px solid black;
+}
+
+.item {
+    background: linear-gradient(to bottom, #ffe259, #ffa751);
+    color: black;
+    border: 2px solid #333;
+}
+
+/* Style des boutons */
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Section de l'inventaire */
+#inventory {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+}
+
+#inventory div {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+#inventory button {
+    margin-left: 10px;
+    background-color: #008cba;
+}
+
+#inventory button:hover {
+    background-color: #007bb5;
+}
+
+/* Section de l'inventaire vide */
+#inventory:empty {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+/* Marges autour des sections */
+h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    color: #4caf50;
+}
+
+/* Styles pour les boutons de contrôle */
+#controls button {
+    margin: 5px;
+    width: 100px;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Style pour le marché */
+#market {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#market div {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+#market button {
+    margin-top: 5px;
+    background-color: #ff4500;
+}
+
+#market button:hover {
+    background-color: #e03e00;
+}
+

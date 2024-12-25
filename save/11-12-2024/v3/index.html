@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jeu RPG</h1>
+    <div id="gameStatus"></div>
+    <div id="gameBoard"></div>
+    <div id="message"></div>
+
+    <div id="controls">
+        <!-- Contrôles pour se déplacer et interagir -->
+        <button id="moveUp">Haut</button>
+        <button id="moveDown">Bas</button>
+        <button id="moveLeft">Gauche</button>
+        <button id="moveRight">Droite</button>
+        <button id="playerAttack">Attaque</button>
+        <button id="pickItem">Ramasser Objet</button>
+    </div>
+
+    <h2>Inventaire</h2>
+    <div id="inventory"></div>
+	
+    <h2>Marché</h2>
+    <div id="market">
+        <!-- Le marché peut être vide au départ, mais les items seront ajoutés dynamiquement -->
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
