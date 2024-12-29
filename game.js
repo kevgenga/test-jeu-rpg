@@ -135,11 +135,11 @@ class Item {
 class Map {
     constructor() {
         this.grid = [
-            [null, new Monster("Gobelin", 50, 10, 20, 1), null, null, new Item("Potion de Soin", "heal")],
-            [null, null, new Item("Potion de Mana", "mana"), new Monster("Orc", 80, 20, 40, 2), new Item("Potion d'Attaque", "attackBuff")],
+            [null, new Monster("Gobelin", 50, 10, 20, 1), null, new Monster("monstre dragon", 5000, 10, 20, 1), new Item("Potion de Soin", "heal")],
+            [null, null, new Item("Potion de Mana", "mana"), new Monster("démon", 80, 20, 40, 2), new Item("Potion d'Attaque", "attackBuff")],
             [new Item("Potion de Mana", "mana"), new Monster("Troll", 500, 10, 10, 5), null, new Item("Potion de Défense", "defenseBuff"), new Item("Potion de Soin", "heal")],
-            [new Item("Potion de Soin", "heal"), new Monster("Dragon", 200, 50, 100, 10), null, null, new Item("Marché", "market")],
-            [null, null, new Monster("Monstre des mers", 150000, 5, 2, 3), new Item("Potion de Soin", "heal"), new Item("Potion de Soin", "heal")],
+            [new Item("Potion de Soin", "heal"), new Monster("roi démon", 200, 50, 100, 10), null, null, new Item("Marché", "market")],
+            [new Monster("monstre lion", 5000, 10, 20, 1), null, new Monster("Monstre lvl I", 150000, 5, 2, 3), new Item("Potion de Soin", "heal"), new Item("Potion de Soin", "heal")],
         ];
 
         this.playerPosition = { x: 0, y: 0 };
@@ -272,7 +272,7 @@ class Map {
 }
 
 // Initialisation des objets
-let player = new Character("Héros", 100, 50, 50, 500, 1, 0, 100);
+let player = new Character("Héro", 100, 50, 50, 500, 1, 0, 100);
 let map = new Map();
 
 let combatActive = false; // Indique si un combat est en cours
@@ -339,15 +339,23 @@ function attemptEscape(monster) {
     updateGameStatus();
 }
 
-// Fonction pour attaquer un monstre
+// Fonction pour attaquer un monstre  
 function attackMonster(monster) {
     if (combatActive && monster.isAlive()) {
         const damage = player.attack(monster);
         document.getElementById("message").textContent = `Vous attaquez ${monster.name} et infligez ${damage} dégâts !`;
 
-        // Vérification si le monstre est vaincu
+        // Ajoutez l'animation de mouvement  
+        const playerDisplay = document.getElementById("rightPanel");  // Assurez-vous que cet ID est correct  
+        playerDisplay.classList.add("character-move");
+        playerDisplay.classList.add("damage-animation");
+
+        // Créer un effet de particules  
+        createParticles();
+
+        // Vérification si le monstre est vaincu  
         if (!monster.isAlive()) {
-            document.getElementById("message").textContent = `${monster.name} est vaincu !`;
+            document.getElementById("message").textContent += ` ${monster.name} est vaincu !`;
             player.gainExp(monster.dropExp());
             player.gainGold(monster.dropGold());
             combatActive = false;
@@ -355,18 +363,49 @@ function attackMonster(monster) {
             hideCombatControls();
             map.checkMonsterDefeated();
         } else {
-            // Le monstre riposte
+            // Le monstre riposte  
             const damageFromMonster = monster.attack(player);
             document.getElementById("message").textContent += ` Le ${monster.name} riposte et inflige ${damageFromMonster} dégâts !`;
+            
+            // Ajoutez une animation de pulsation sur la barre de vie  
+            document.getElementById("playerHP").classList.add("hp-pulse");
 
-            // Vérifie si le joueur est toujours en vie après l'attaque du monstre
+            // Vérifie si le joueur est toujours en vie après l'attaque du monstre  
             if (!player.isAlive()) {
                 document.getElementById("message").textContent = "Vous êtes mort !";
                 disableActions();
             }
         }
-
+        
         updateGameStatus();
+
+        // Retirez la classe d'animation après un délai pour permettre la réapplication  
+        setTimeout(() => {
+            playerDisplay.classList.remove("character-move");
+        }, 500); // Durée de l'animation  
+    }
+}
+
+
+// Fonction pour créer des particules  
+function createParticles() {
+    const particleCount = 10; // Nombre de particules à créer  
+    const gameBoard = document.getElementById("gameBoard");
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Positionner au hasard  
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+
+        gameBoard.appendChild(particle);
+
+        // Retirer la particule après l'animation  
+        particle.addEventListener('animationend', () => {
+            particle.remove();
+        });
     }
 }
 
@@ -426,8 +465,23 @@ function updateGameStatus() {
     const monsterAlive = map.monster && map.monster.isAlive(); // Vérifie que le monstre est vivant
 
     // Mise à jour du statut avec les informations du joueur et de l'ennemi
-    const status = `Joueur: ${player.hp} HP | Mana: ${player.mana} | Défense: ${player.defense} | Attaque: ${player.attackPower} | Niveau: ${player.level} | Exp: ${player.exp} | Or: ${player.gold} | Ennemi: ${monsterAlive ? map.monster.hp : 'Aucun'} HP`;
+    const status = `Ennemi: ${monsterAlive ? map.monster.hp : 'Aucun'} HP`;
     document.getElementById("gameStatus").textContent = status;
+    // Mise à jour des statistiques du joueur  
+    document.getElementById("playerName").textContent = player.name;
+    document.getElementById("playerHP").textContent = player.hp;
+    document.getElementById("playerMana").textContent = player.mana;
+    document.getElementById("playerAttackPower").textContent = player.attackPower;
+    document.getElementById("playerDefense").textContent = player.defense;
+    document.getElementById("playerLevel").textContent = player.level;
+    document.getElementById("playerExp").textContent = `${player.exp}`;
+    document.getElementById("playerGold").textContent = player.gold;
+
+    // Autres mises à jour de statut, par exemple pour vérifier si le joueur est vivant ou non  
+    if (!player.isAlive()) {
+        document.getElementById("message").textContent = "Vous êtes mort !";
+        disableActions();
+    }
 
     // Si le monstre est vivant et que le combat est toujours actif
     if (monsterAlive) {
@@ -448,6 +502,17 @@ function updateGameStatus() {
         }
     }
 }
+
+function removeAnimationClasses() {
+    const playerDisplay = document.getElementById("gameBoard"); // Supposons que le joueur soit affiché ici  
+    playerDisplay.classList.remove("attack-animation");
+
+    document.getElementById("playerHP").classList.remove("damage-animation");
+}
+
+// Appeler cette fonction après l'attaque  
+setTimeout(removeAnimationClasses, 500); // Attendre la durée de l'animation
+
 
 function disableActions() {
     document.getElementById("playerAttack").disabled = true;
@@ -639,3 +704,34 @@ Map.prototype.move = function (direction) {
     checkForCombat();
 };
 
+
+function showMessage(html, type = 'info') {
+    const messageElement = document.getElementById("message");
+    
+    // Retirer toutes les classes précédentes  
+    messageElement.className = '';
+    
+    // Ajouter la classe en fonction du type de message  
+    messageElement.classList.add(type); // 'success', 'error', 'warning', 'info'
+    messageElement.classList.add('show'); // Classe pour rendre visible
+
+    // Mettre à jour le contenu HTML du message  
+    messageElement.innerHTML = html;
+
+    // Ajouter une animation d'apparition  
+    messageElement.style.animation = 'slideIn 0.5s forwards';
+
+    // Retirer le message après quelques secondes  
+    setTimeout(() => {
+        messageElement.classList.remove('show'); // Rendre l'élément invisible  
+        setTimeout(() => {
+            messageElement.innerHTML = ''; // Effacer le contenu après disparition  
+        }, 500); // Correspond à la durée de la transition  
+    }, 3000); // Durée d'affichage du message  
+}
+
+// Exemples d'utilisation :
+showMessage("Vous avez gagné de l'expérience !", "success");
+showMessage("Vous avez perdu tous vos points de vie !", "error");
+showMessage("Attention, un monstre approche !", "warning");
+showMessage("Bienvenue dans le jeu ! <span id='playerName'>" + player.name + "</span>", "info");

@@ -1,3 +1,4 @@
+
 /* Style général de la page */
 body {
     font-family: 'Arial', sans-serif;
@@ -63,15 +64,52 @@ h1 {
     border: 2px solid #4caf50;
 }
 
-/* Messages du jeu */
 #message {
-    font-size: 16px;
-    margin-top: 20px;
-    color: #f2f2f2;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    margin: 10px 0;
     border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    opacity: 0; /* Invisible par défaut */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transition pour l'apparition */
+}
+
+.show {
+    opacity: 1; /* Visible */
+    transform: translateY(0); /* Position initiale */
+}
+
+.success {
+    background-color: #4CAF50; /* Vert pour les succès */
+    color: white;
+}
+
+.error {
+    background-color: #f44336; /* Rouge pour les erreurs */
+    color: white;
+}
+
+.warning {
+    background-color: #ff9800; /* Orange pour les avertissements */
+    color: white;
+}
+
+.info {
+    background-color: #2196F3; /* Bleu pour les informations */
+    color: white;
+}
+
+/* Animation d'apparition */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Glisse depuis le haut */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Style de la carte et des éléments */
@@ -286,4 +324,85 @@ h2 {
 
 #combatControls button#flee:hover {
     background-color: #d32f2f; /* Rouge foncé pour Fuir */
+}
+
+/* Animation pour les attaques */
+.attack-animation {
+    animation: attack 0.5s ease forwards;
+}
+
+@keyframes attack {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Effet de flash pour les dégâts */
+.damage-animation {
+    animation: flash 0.5s ease forwards;
+}
+
+@keyframes flash {
+    0% { color: #ff0000; }
+    50% { color: #ffffff; }
+}
+
+/* Style du panneau des statistiques */
+#statsPanel {
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    width: 200px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#statistiques {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+
+/* Animation de mouvement du personnage */
+.character-move {
+    animation: move 0.3s ease forwards;
+}
+
+@keyframes move {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-30px); }
+    100% { transform: translateX(0); }
+}
+
+/* Effets de particules */
+@keyframes particles {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Style des particules */
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particles 0.5s ease forwards;
+}
+
+/* Animation de pulsation pour la santé */
+.hp-pulse {
+    animation: pulse 0.5s ease forwards;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }

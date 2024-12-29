@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Jeu RPG</h1>
+        
+        <!-- Panneau des statistiques à gauche -->
+        <div id="statsPanel">
+            <h2>Statistiques</h2>
+            <div id="statistiques">
+                <p><strong>Nom :</strong> <span id="playerName"></span></p>
+                <p><strong>HP :</strong> <span id="playerHP"></span></p>
+                <p><strong>Mana :</strong> <span id="playerMana"></span></p>
+                <p><strong>Attaque :</strong> <span id="playerAttackPower"></span></p>
+                <p><strong>Défense :</strong> <span id="playerDefense"></span></p>
+                <p><strong>Niveau :</strong> <span id="playerLevel"></span></p>
+                <p><strong>Expérience :</strong> <span id="playerExp"></span></p>
+                <p><strong>Or :</strong> <span id="playerGold"></span></p>
+            </div>
+        </div>
+        <div id="message"></div>
+        <div id="gameStatus"></div>
+        <div id="gameBoard"></div>
+
+        <div id="rightPanel">
+            <h3>Objet/Monstre</h3>
+            <img id="itemOrMonsterImage" src="" alt="Image du monstre ou objet" />
+        </div>
+
+        <div id="controls">
+            <button id="moveUp">Haut</button>
+            <button id="moveDown">Bas</button>
+            <button id="moveLeft">Gauche</button>
+            <button id="moveRight">Droite</button>
+            <button id="pickItem">Ramasser Objet</button>
+        </div>
+
+        <div id="combatControls" style="display: none;">
+            <button id="attackMonster">Attaquer</button>
+            <button id="flee">Fuir</button>
+        </div>
+
+        <h2>Inventaire</h2>
+        <div id="inventory"></div>
+
+        <h2>Marché</h2>
+        <div id="market"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
