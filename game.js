@@ -139,7 +139,7 @@ class Map {
             [null, null, new Item("Potion de Mana", "mana"), new Monster("démon", 80, 20, 40, 2), new Item("Potion d'Attaque", "attackBuff")],
             [new Item("Potion de Mana", "mana"), new Monster("Troll", 500, 10, 10, 5), null, new Item("Potion de Défense", "defenseBuff"), new Item("Potion de Soin", "heal")],
             [new Item("Potion de Soin", "heal"), new Monster("roi démon", 200, 50, 100, 10), null, null, new Item("Marché", "market")],
-            [new Monster("monstre lion", 5000, 10, 20, 1), null, new Monster("Monstre lvl I", 150000, 5, 2, 3), new Item("Potion de Soin", "heal"), new Item("Potion de Soin", "heal")],
+            [new Monster("monstre lion", 5000, 10, 20, 1), null, new Monster("Monstre lvl 1", 150000, 5, 2, 3), new Item("Potion de Soin", "heal"), new Item("Potion de Soin", "heal")],
         ];
 
         this.playerPosition = { x: 0, y: 0 };
