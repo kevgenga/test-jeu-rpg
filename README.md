@@ -5,4 +5,5 @@ Le jeu est disponible ! Cliquez ci-dessous pour y accéder :
 ### 🎮 Commandes du jeu  
 - **Déplacement** : Haut ⬆️ | Bas ⬇️ | Gauche ⬅️ | Droite ➡️  
 - **Attaquer** : `A` ⚔️  
-- **Fuir** : `E` 🏃‍♂️  
+- **Fuir** : `E` 🏃‍♂️
+- **Ramasser Objet** : `E` 🎒
